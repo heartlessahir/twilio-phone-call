@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Twilio Phone Call</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<button id="makeCall">Make Call</button>
+
+<script>
+    $(document).ready(function() {
+        $('#makeCall').on('click', function() {
+            $.ajax({
+                type: 'POST',
+                url: 'https://api.twilio.com/2010-04-01/Accounts/YourAccountSID/Calls.json',
+                data: {
+                    From: '+14357740407',
+                    To: '+918529893877',
+                    Url: 'http://demo.twilio.com/docs/voice.xml'  // a URL that contains TwiML instructions
+                },
+                headers: {
+                    'Authorization': 'Basic ' + btoa('YourAccountSID:92ec62598707b8a1be567a112511bfe8')
+                },
+                success: function(response) {
+                    console.log('Call initiated successfully:', response);
+                },
+                error: function(error) {
+                    console.error('Error initiating call:', error);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
